@@ -1,5 +1,3 @@
-//^ ЕЩЕ В ПРОЦЕССЕ
-
 //^     Напиши скрипт создания и очистки коллекции элементов.
 
 //^     Пользователь вводит количество элементов в input и нажимает кнопку Создать,
@@ -17,33 +15,34 @@
 
 //^     Создай функцию destroyBoxes(), которая очищает div#boxes.
 
-// function createBoxes(amount) {
-//   return amount;
-// }
-
-const body = document.querySelector('body');
-const input = document.querySelector('input');
 const addBtn = document.querySelector('[data-action="render"]');
 const clearBtn = document.querySelector('[data-action="destroy"]');
-
-console.log(body);
-console.log(input);
-console.log(addBtn);
-console.log(clearBtn);
+const boxes = document.querySelector('#boxes');
 
 addBtn.addEventListener('click', addDiv);
-clearBtn.addEventListener('click', destroyBoxes);
+clearBtn.addEventListener('click', delDiv);
 
 function addDiv() {
-  // body.insertAdjacentHTML('beforeend', '<ul></ul>');
-  // document.createElement('div');
-  // body.append('div');
+  let amount = document.querySelector('#controls input').value;
+  createBoxes(amount);
 }
 
-function destroyBoxes() {
-  // body.remove('div');
+function createBoxes(amount) {
+  let basicSize = 30;
+  let fragment = document.createDocumentFragment();
+  for (let i = 0; i < amount; i++) {
+    let size = basicSize + i * 10;
+    let div = document.createElement('div');
+    div.style.cssText = `width: ${size}px; height: ${size}px; background-color: rgba( ${random()} , ${random()} , ${random()} )`;
+    fragment.appendChild(div);
+  }
+  boxes.appendChild(fragment);
 }
-var picHolder = document.getElementById('picHolder');
-var img = document.createElement('img');
-img.src = 'images/stone3.jpg';
-picHolder.appendChild(img);
+
+function delDiv() {
+  boxes.innerHTML = '';
+}
+
+function random() {
+  return Math.floor(Math.random() * 256);
+}
