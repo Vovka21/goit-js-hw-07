@@ -8,7 +8,7 @@ const text = document.querySelector('#text');
 console.log(text);
 
 slider.addEventListener('input', changeSize);
-
+slider.value = 16;
 function changeSize() {
   text.style.fontSize = slider.value + 'px';
 }

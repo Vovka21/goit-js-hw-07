@@ -26,12 +26,17 @@ function addDiv() {
   let amount = document.querySelector('#controls input').value;
   createBoxes(amount);
 }
+let basicSize = 30;
 
 function createBoxes(amount) {
-  let basicSize = 30;
+  // let basicSize = 30;
+  // basicSize += 10;
   let fragment = document.createDocumentFragment();
   for (let i = 0; i < amount; i++) {
-    let size = basicSize + i * 10;
+    // let size = basicSize + i * 10;
+    let size = basicSize;
+    basicSize += 10;
+
     let div = document.createElement('div');
     div.style.cssText = `width: ${size}px; height: ${size}px; background-color: rgba( ${random()} , ${random()} , ${random()} )`;
     fragment.appendChild(div);
@@ -41,6 +46,7 @@ function createBoxes(amount) {
 
 function delDiv() {
   boxes.innerHTML = '';
+  basicSize = 30;
 }
 
 function random() {
